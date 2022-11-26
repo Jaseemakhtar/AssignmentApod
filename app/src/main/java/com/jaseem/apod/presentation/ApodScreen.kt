@@ -28,7 +28,6 @@ fun ApodScreen(
             modifier = Modifier.fillMaxSize()
         ) {
             gallery(
-                onClickBack = onClickBack,
                 onClickCard = {
                     navController.navigateToDetails(
                         title = it.title,

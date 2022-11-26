@@ -9,14 +9,12 @@ const val GalleryRoute = "Gallery"
 
 
 fun NavGraphBuilder.gallery(
-    onClickBack: () -> Unit,
     onClickCard: (card: Cosmos) -> Unit
 ) {
     composable(
         route = GalleryRoute
     ) {
         GalleryScreen(
-            onClickBack = onClickBack,
             onClickCard = onClickCard
         )
     }
