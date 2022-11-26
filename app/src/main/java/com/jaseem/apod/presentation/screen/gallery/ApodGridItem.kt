@@ -1,21 +1,19 @@
 package com.jaseem.apod.presentation.screen.gallery
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import coil.compose.AsyncImage
+import com.jaseem.apod.presentation.ui.component.TextOverlayGradientBg
 
 @Composable
 fun ApodGridItem(
@@ -24,28 +22,59 @@ fun ApodGridItem(
     copyright: String,
     modifier: Modifier
 ) {
-    Box(modifier = modifier) {
+    ConstraintLayout(modifier = modifier) {
+        val (imageBg, textTitle, textCopyright, overlayTextBg) = createRefs()
+
         AsyncImage(
             model = imageUrl,
             contentDescription = "Image: $title",
             contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.constrainAs(imageBg) {
+                width = Dimension.matchParent
+                height = Dimension.matchParent
+            }
         )
 
-        Column(modifier = Modifier
-            .align(Alignment.BottomCenter)
-            .fillMaxWidth()
-            .padding(horizontal = 14.dp, vertical = 12.dp)
-        ) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleLarge
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = copyright,
-                style = MaterialTheme.typography.titleMedium
-            )
-        }
+        TextOverlayGradientBg(
+            modifier = Modifier.constrainAs(overlayTextBg) {
+                linkTo(start = parent.start, end = parent.end)
+                linkTo(top = textTitle.top, bottom = parent.bottom)
+
+                width = Dimension.matchParent
+                height = Dimension.fillToConstraints
+            }
+        )
+
+        Text(
+            text = title,
+            style = MaterialTheme.typography.titleLarge,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier
+                .constrainAs(textTitle) {
+                    linkTo(start = parent.start, end = parent.end)
+                    bottom.linkTo(textCopyright.top, 8.dp)
+
+                    width = Dimension.matchParent
+                }
+                .padding(top = 12.dp)
+                .padding(horizontal = 14.dp)
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = copyright,
+            style = MaterialTheme.typography.titleMedium,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier
+                .constrainAs(textCopyright) {
+                    linkTo(start = parent.start, end = parent.end)
+                    bottom.linkTo(parent.bottom)
+
+                    width = Dimension.matchParent
+                }
+                .padding(bottom = 12.dp)
+                .padding(horizontal = 14.dp)
+        )
     }
 }

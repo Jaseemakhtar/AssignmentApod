@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Assignment-Nasa-</string>
+    <string name="title_lets_explore">Discover</string>
+    <string name="title_cosmos">The cosmos</string>
 </resources>
