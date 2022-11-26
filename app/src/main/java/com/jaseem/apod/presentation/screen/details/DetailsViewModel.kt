@@ -16,7 +16,7 @@ class DetailsViewModel @Inject constructor(
         get() = DetailsUiState(
             title = detailsArg.title,
             imageUrl = detailsArg.hdUrl,
-            copyright = detailsArg.copyright ?: "",
+            copyright = detailsArg.copyright?.takeIf { it != "null" } ?: "",
             date = detailsArg.date,
             explanation = detailsArg.explanation
         )

@@ -1,11 +1,9 @@
 package com.jaseem.apod.presentation.screen.details
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -20,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -48,7 +47,6 @@ fun DetailsScreen(
 
         val uiState = viewModel.uiState
 
-        Log.d("DebugExplanation", "DetailsScreen: ${uiState.explanation}")
         Icon(
             painter = painterResource(id = R.drawable.ic_back),
             contentDescription = "Back Icon",
@@ -70,7 +68,8 @@ fun DetailsScreen(
 
         Text(
             text = uiState.title,
-            style = MaterialTheme.typography.headlineSmall,
+            style = MaterialTheme.typography.headlineSmall,maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
             modifier = Modifier.constrainAs(textTitle) {
                 linkTo(start = iconBack.end, end = parent.end, endMargin = 24.dp)
                 centerVerticallyTo(iconBack)

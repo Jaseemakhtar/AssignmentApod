@@ -74,7 +74,7 @@ fun GalleryScreen(
                     ApodGrid(
                         items = uiState.data,
                         modifier = Modifier
-                            .padding(top = 38.dp)
+                            .padding(top = 14.dp)
                             .fillMaxWidth()
                             .weight(1f),
                         onClickCard = onClickCard
