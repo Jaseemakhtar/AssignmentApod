@@ -11,3 +11,4 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 val EbonyClay500 = Color(0xFF22323E)
+val RiverBed500 = Color(0xFF4B5861)

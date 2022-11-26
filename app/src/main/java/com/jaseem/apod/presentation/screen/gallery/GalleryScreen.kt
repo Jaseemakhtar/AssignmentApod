@@ -23,6 +23,7 @@ import com.jaseem.apod.data.network.model.Cosmos
 import com.jaseem.apod.domain.state.Error
 import com.jaseem.apod.domain.state.Loading
 import com.jaseem.apod.domain.state.Success
+import com.jaseemakhtar.compose.shimmer.shimmer
 
 @Composable
 fun GalleryScreen(
@@ -36,7 +37,9 @@ fun GalleryScreen(
     ) {
         when (val uiState = viewModel.uiState.value) {
             Loading -> {
-                CircularProgressIndicator()
+                LoadingSkeleton(
+                    modifier = Modifier.fillMaxSize().shimmer()
+                )
             }
 
             is Error -> {
