@@ -39,6 +39,12 @@ val AppTypography = Typography(
         fontWeight = FontWeight.Normal,
         fontFamily = JockeyOne
     ),
+    headlineSmall = TextStyle(
+        color = Color.White,
+        fontSize = 22.sp,
+        fontWeight = FontWeight.Normal,
+        fontFamily = JockeyOne
+    ),
     titleLarge = TextStyle(
         color = Color.White,
         fontSize = 16.sp,
@@ -52,7 +58,7 @@ val AppTypography = Typography(
         fontFamily = Poppins
     ),
     bodyMedium = TextStyle(
-        color = Color.White,
+        color = EbonyClay500,
         fontSize = 16.sp,
         fontWeight = FontWeight.Normal,
         fontFamily = Poppins

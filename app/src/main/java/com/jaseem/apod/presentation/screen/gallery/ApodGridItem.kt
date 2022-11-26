@@ -12,6 +12,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import androidx.constraintlayout.compose.Visibility
 import coil.compose.AsyncImage
 import com.jaseem.apod.presentation.ui.component.TextOverlayGradientBg
 
@@ -19,7 +20,7 @@ import com.jaseem.apod.presentation.ui.component.TextOverlayGradientBg
 fun ApodGridItem(
     title: String,
     imageUrl: String,
-    copyright: String,
+    copyright: String?,
     modifier: Modifier
 ) {
     ConstraintLayout(modifier = modifier) {
@@ -53,7 +54,7 @@ fun ApodGridItem(
             modifier = Modifier
                 .constrainAs(textTitle) {
                     linkTo(start = parent.start, end = parent.end)
-                    bottom.linkTo(textCopyright.top, 8.dp)
+                    bottom.linkTo(textCopyright.top, 8.dp, 8.dp)
 
                     width = Dimension.matchParent
                 }
@@ -62,7 +63,7 @@ fun ApodGridItem(
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = copyright,
+            text = copyright ?: "",
             style = MaterialTheme.typography.titleMedium,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
@@ -72,6 +73,12 @@ fun ApodGridItem(
                     bottom.linkTo(parent.bottom)
 
                     width = Dimension.matchParent
+
+                    visibility = if (copyright.isNullOrEmpty()) {
+                        Visibility.Gone
+                    } else {
+                        Visibility.Visible
+                    }
                 }
                 .padding(bottom = 12.dp)
                 .padding(horizontal = 14.dp)

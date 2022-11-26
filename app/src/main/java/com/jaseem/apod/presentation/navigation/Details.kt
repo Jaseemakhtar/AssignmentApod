@@ -18,18 +18,18 @@ const val hdUrlArg = "hdUrl"
 const val explanationArg = "explanation"
 
 internal class DetailsArg(
-    titleArg: String,
-    copyrightArg: String,
-    dateArg: String,
-    hdUrlArg: String,
-    explanationArg: String
+    val title: String,
+    val copyright: String?,
+    val date: String,
+    val hdUrl: String,
+    val explanation: String
 ) {
     constructor(savedStateHandle: SavedStateHandle) : this(
-        checkNotNull(savedStateHandle[titleArg]),
-        checkNotNull(savedStateHandle[copyrightArg]),
-        checkNotNull(savedStateHandle[dateArg]),
-        checkNotNull(savedStateHandle[hdUrlArg]),
-        checkNotNull(savedStateHandle[explanationArg])
+        Uri.decode(checkNotNull(savedStateHandle[titleArg]) as String),
+        Uri.decode(savedStateHandle[copyrightArg] ?: ""),
+        Uri.decode(checkNotNull(savedStateHandle[dateArg]) as String),
+        Uri.decode(checkNotNull(savedStateHandle[hdUrlArg]) as String),
+        Uri.decode(checkNotNull(savedStateHandle[explanationArg]) as String)
     )
 }
 
@@ -37,13 +37,16 @@ fun NavGraphBuilder.details(
     onClickBack: () -> Unit
 ) {
     composable(
-        route = DetailsRoute,
+        route = "$DetailsRoute/{$titleArg}/{$copyrightArg}/{$dateArg}/{$hdUrlArg}/{$explanationArg}",
         arguments = listOf(
-            navArgument(titleArg) {type = NavType.StringType},
-            navArgument(copyrightArg) {type = NavType.StringType},
-            navArgument(dateArg) {type = NavType.StringType},
-            navArgument(hdUrlArg) {type = NavType.StringType},
-            navArgument(explanationArg) {type = NavType.StringType}
+            navArgument(titleArg) { type = NavType.StringType },
+            navArgument(copyrightArg) {
+                type = NavType.StringType
+                nullable = true
+            },
+            navArgument(dateArg) { type = NavType.StringType },
+            navArgument(hdUrlArg) { type = NavType.StringType },
+            navArgument(explanationArg) { type = NavType.StringType }
         )
     ) {
         DetailsScreen(onClickBack = onClickBack)
@@ -52,7 +55,7 @@ fun NavGraphBuilder.details(
 
 fun NavController.navigateToDetails(
     title: String,
-    copyright: String,
+    copyright: String?,
     date: String,
     hdUrl: String,
     explanation: String
