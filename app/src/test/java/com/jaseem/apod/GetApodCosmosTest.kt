@@ -19,7 +19,7 @@ class GetApodCosmosTest {
 
         val cosmosList = repository.getAll()
 
-        assert(cosmosList is Success && cosmosList.data.isNotEmpty())
+        assertThat((cosmosList as Success).data).isNotEmpty()
     }
 
     @Test
