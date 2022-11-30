@@ -33,7 +33,7 @@ fun ApodScreen(
                         title = it.title,
                         copyright = it.copyright,
                         date = it.date,
-                        hdUrl = it.hdurl,
+                        hdUrl = it.url,
                         explanation = it.explanation
                     )
                 }

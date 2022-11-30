@@ -25,6 +25,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import com.google.accompanist.pager.HorizontalPager
 import com.jaseem.apod.R
 import com.jaseem.apod.presentation.ui.component.TextOverlayGradientBg
 
@@ -33,6 +34,7 @@ fun DetailsScreen(
     onClickBack: () -> Unit,
     viewModel: DetailsViewModel = hiltViewModel()
 ) {
+
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
         val (
             iconBack,
@@ -82,6 +84,8 @@ fun DetailsScreen(
             model = uiState.imageUrl,
             contentDescription = "${uiState.title} Image",
             contentScale = ContentScale.Crop,
+            placeholder = painterResource(id = R.drawable.img_loading),
+            error = painterResource(id = R.drawable.img_no_image),
             modifier = Modifier
                 .constrainAs(imageCosmos) {
                     top.linkTo(textTitle.bottom, 8.dp)

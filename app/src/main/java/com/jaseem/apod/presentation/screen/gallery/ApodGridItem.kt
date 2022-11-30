@@ -8,12 +8,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.Visibility
 import coil.compose.AsyncImage
+import com.jaseem.apod.R
 import com.jaseem.apod.presentation.ui.component.TextOverlayGradientBg
 
 @Composable
@@ -30,6 +32,8 @@ fun ApodGridItem(
             model = imageUrl,
             contentDescription = "Image: $title",
             contentScale = ContentScale.Crop,
+            placeholder = painterResource(id = R.drawable.img_loading),
+            error = painterResource(id = R.drawable.img_no_image),
             modifier = Modifier.constrainAs(imageBg) {
                 width = Dimension.matchParent
                 height = Dimension.matchParent

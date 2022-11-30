@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -19,10 +18,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jaseem.apod.R
-import com.jaseem.apod.data.network.model.Cosmos
-import com.jaseem.apod.domain.state.Error
-import com.jaseem.apod.domain.state.Loading
-import com.jaseem.apod.domain.state.Success
+import com.jaseem.apod.domain.Cosmos
+import com.jaseem.apod.domain.state.UiState
 import com.jaseemakhtar.compose.shimmer.shimmer
 
 @Composable
@@ -36,19 +33,19 @@ fun GalleryScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         when (val uiState = viewModel.uiState.value) {
-            Loading -> {
+            UiState.Loading -> {
                 LoadingSkeleton(
-                    modifier = Modifier.fillMaxSize().shimmer()
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .shimmer()
                 )
             }
 
-            is Error -> {
-                Text(
-                    text = uiState.message
-                )
+            is UiState.Error -> {
+                Text(text = uiState.message)
             }
 
-            is Success -> {
+            is UiState.Success -> {
                 Column(modifier = Modifier.fillMaxSize()) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_menu),
