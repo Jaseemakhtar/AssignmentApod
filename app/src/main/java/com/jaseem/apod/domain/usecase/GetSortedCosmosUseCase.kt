@@ -27,10 +27,10 @@ class GetSortedCosmosUseCase @Inject constructor(
                 emit(
                     UiState.Success(
                         res.data
-                            .toEntity()
                             .sortedByDescending {
                                 dateFormatParserUseCase(it.date)
                             }
+                            .toEntity()
                     )
                 )
             }

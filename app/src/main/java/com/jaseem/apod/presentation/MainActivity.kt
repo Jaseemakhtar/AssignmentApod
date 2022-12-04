@@ -15,10 +15,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AssignmentNasaTheme {
                 ApodScreen(
-                    modifier = Modifier.fillMaxSize(),
-                    onClickBack = {
-                        onBackPressed()
-                    }
+                    modifier = Modifier.fillMaxSize()
                 )
             }
         }

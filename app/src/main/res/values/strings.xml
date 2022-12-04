@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Assignment-Nasa-</string>
+    <!--Title-->
     <string name="title_lets_explore">Discover</string>
     <string name="title_cosmos">The cosmos</string>
+
+    <!--Accessibility-->
+    <string name="accessibility_back_icon">Back Icon</string>
+    <string name="accessibility_close_details">Close Details Icon</string>
 </resources>

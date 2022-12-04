@@ -8,5 +8,11 @@ class DateFormatParserUseCase {
     private val datePattern = "yyyy-MM-dd"
     private val dateFormat = SimpleDateFormat(datePattern, Locale.getDefault())
 
-    operator fun invoke(date: String): Date = dateFormat.parse(date)
+    operator fun invoke(date: String?): Date? = try {
+        if (date == null) throw Exception("Raw date is null")
+        dateFormat.parse(date)
+    } catch (e: Exception) {
+        e.printStackTrace()
+        null
+    }
 }
